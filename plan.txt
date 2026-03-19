@@ -1,0 +1,19 @@
+A user must be able to:
+- Create a task 
+- Edit a task
+- Delete a task 
+- Check off a task 
+- Re-arrange tasks 
+- Refresh the page and still see their tasks 
+
+
+What to store in local storage
+- The task's text content (e.g "Walk the dog")
+- The checked state
+
+Local storage example schema:
+
+{
+    task: "Walk the dog"
+    checked: true
+}
