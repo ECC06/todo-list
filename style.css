@@ -71,6 +71,11 @@ h1 {
     justify-content: space-between;
     align-items: center;
     width: fit-content;
+    cursor: pointer;
+}
+
+.first-add-btn:hover path {
+    fill: green;
 }
 
 .first-add-btn span {
@@ -79,7 +84,7 @@ h1 {
 }
 
 .first-add-btn svg {
-    transform: translateX(1px);
+    transform: scale(1.05);
 }
 
 /* TASKS CONT*/
@@ -237,6 +242,10 @@ li:has(.checkbox:checked) label::after {
         width: 135px;
         height: 40px;
         border: 2.5px solid;
+    }
+
+    .first-add-btn svg {
+        transform: translateX(1px);
     }
 }
 
