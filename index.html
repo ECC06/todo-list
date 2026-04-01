@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="./images-and-icons/icons/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="./index.js"></script>
+</head>
+
+<body>
+    <div class="chalkboard-cont">
+        <img class="chalkboard" src="./images-and-icons/images/chalkboard.png" alt="chalkboard">
+
+        <!-- "no tasks yet" container -->
+        <article class="no-tasks-cont display-none">
+            <img class="sleeping-cat" src="./images-and-icons/images/no-tasks-img.png"
+                alt="chalk drawing of a sleeping man">
+
+            <h1>YOU HAVE NO TASKS!</h1>
+
+            <button class="first-add-btn">
+                <span>Add one!</span>
+                <svg width="49" height="51" viewBox="0 0 49 51" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0.5" y="0.5" width="48" height="50" fill="white" stroke="white" />
+                    <path d="M21 14V23H12V29H21V38H27V29H36V23H27V14H21Z" fill="black" />
+                </svg>
+            </button>
+        </article>
+
+        <!-- tasks container -->
+        <article class="tasks-cont">
+            <h1>TASKS DONE: <span>2</span>/<span>10</span></h1>
+
+            <ul class="items-list">
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox" checked="true">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-1" value="Buy groceries">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox" checked="true">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-2" value="Call the dentist">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-3" value="Do the laundry">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-4" value="Read for 30 minutes">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-5" value="Water the plants">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-6" value="Reply to emails">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-7" value="Take out the trash">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-8" value="Go for a walk">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-9" value="Clean the kitchen">
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input class="checkbox" type="checkbox">
+                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
+                        <input class="text-input" type="text" id="textbox-10" value="Prepare tomorrow's lunch">
+                    </label>
+                </li>
+
+            </ul>
+
+            <div class="buttons">
+                <img class="add-btn" src="./images-and-icons/icons/add-task-icon.svg" alt="add task icon">
+                <img class="add-btn" src="./images-and-icons/icons/delete-task-icon.svg" alt="delete task icon">
+            </div>
+        </article>
+    </div>
+
+</body>
+
+</html>
