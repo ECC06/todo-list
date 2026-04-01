@@ -17,3 +17,15 @@ Local storage example schema:
     task: "Walk the dog"
     checked: true
 }
+
+
+-----
+
+- 
+When user clicks on first add task button:
+
+    Hide “no tasks yet”
+
+    Display “tasks container” 
+
+    Focus in on first task textbox

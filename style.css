@@ -154,9 +154,21 @@ li:has(.checkbox:checked) label::after {
 }
 
 .buttons {
+    right: 11%;
+    bottom: 10%;
+    position: absolute;
     display: flex;
     justify-content: end;
     gap: 8px;
+}
+
+.buttons :is(.add-btn, .delete-btn) {
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.buttons :is(.add-btn, .delete-btn):hover {
+    scale: 1.2;
 }
 
 .display-none {
@@ -215,7 +227,7 @@ li:has(.checkbox:checked) label::after {
 }
 
 @media (max-width: 490px) {
-    .cont,
+    .tasks-cont,
     .items-list {
         gap: 6px;
     }
@@ -229,7 +241,7 @@ li:has(.checkbox:checked) label::after {
 }
 
 @media (max-width: 380px) {
-    .cont,
+    .tasks-cont,
     .items-list {
         gap: 5px;
     }
