@@ -21,11 +21,8 @@ Local storage example schema:
 
 -----
 
-- 
-When user clicks on first add task button:
+- design the task class
 
-    Hide “no tasks yet”
 
-    Display “tasks container” 
 
-    Focus in on first task textbox
+- add in the add task functionality
