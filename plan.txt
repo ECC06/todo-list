@@ -21,8 +21,4 @@ Local storage example schema:
 
 -----
 
-- design the task class
-
-
-
-- add in the add task functionality
+When a user updates a task, update that task in local storage
