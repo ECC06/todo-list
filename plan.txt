@@ -1,6 +1,6 @@
 A user must be able to:
 - Create a task 
-- Edit a task
+- Update a task
 - Delete a task 
 - Check off a task 
 - Re-arrange tasks 
@@ -18,7 +18,48 @@ Local storage example schema:
     checked: true
 }
 
-
 -----
 
 When a user updates a task, update that task in local storage
+
+
+GOAL: When the user checks an item, update the checkedState property in Local storage
+
+Approach:
+1. Extract the id of the checkbox e.g "task-98-checkbox" ✅
+2. Convert the id to a number e.g "task-98-checkbox" => 98  ✅
+3. Find an object in local storage with an id of 98 ✅
+4. Update the checkedState of that object to true ✅
+
+[
+    {
+        "id": "96",
+        "checkedState": false,
+        "userInput": "Watch football match"
+    },
+    {
+        "id": "91",
+        "checkedState": false,
+        "userInput": "Bake cookies"
+    },
+    {
+        "id": "41",
+        "checkedState": false,
+        "userInput": "Service car"
+    },
+    {
+        "id": "53",
+        "checkedState": false,
+        "userInput": "Cook rice"
+    },
+    {
+        "id": "68",
+        "checkedState": false,
+        "userInput": "Clean my room "
+    },
+    {
+        "id": "77",
+        "checkedState": false,
+        "userInput": "Take a nap"
+    }
+]

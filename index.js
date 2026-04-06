@@ -110,6 +110,8 @@ addBtn.addEventListener("click", function (e) {
             alert("Fill in the current task first!");
             const message = "Attempt to duplicate empty task item"; //todo: change to error message
             console.log(message);
+
+
             return;
         }
 
@@ -175,8 +177,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         });
+
+        const checkBoxes = document.querySelectorAll(".checkbox"); //[]
+
+        checkBoxes.forEach(function (checkbox) {
+            checkbox.addEventListener("change", function (e) {
+                const checkBox = e.target;
+                const checkId = checkBox.id.split("-")[1]; //e.g "task-92-checkbox" => 92
+                console.log(checkId);
+                //find an object in local storage with the id
+
+                const tasksArr = getTasksFromLocalStorage();
+
+                for (const obj of tasksArr) {
+                    if (obj.id === checkId) {
+                        obj.checkedState = !obj.checkedState;
+                        break;
+                    }
+                }
+
+                localStorage.setItem("tasks", JSON.stringify(tasksArr));
+            });
+        })
+
     }
 
 
 });
+
+
+
+
+
 
