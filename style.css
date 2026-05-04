@@ -142,6 +142,7 @@ li:has(.checkbox:checked) label::after {
     top: 23%;
     left: 2.5%;
     display: block;
+    cursor: pointer;
 }
 
 .text-input {
@@ -167,17 +168,25 @@ li:has(.checkbox:checked) label::after {
     gap: 8px;
 }
 
-.buttons :is(.add-btn, .delete-btn) {
+:is(.add-btn, .delete-btn, .cancel-delete-btn) {
     cursor: pointer;
     transition: 0.3s ease-in-out;
+    width: 58px;
+    height: 50px;
+    background-color: transparent;
+    border: none;
 }
 
-.buttons :is(.add-btn, .delete-btn):hover {
+:is(.add-btn, .delete-btn, .cancel-delete-btn):hover {
     scale: 1.2;
 }
 
 .display-none {
     display: none;
+}
+
+.red-border {
+    border: 3px dashed red;
 }
 
 @media (max-width: 580px) {

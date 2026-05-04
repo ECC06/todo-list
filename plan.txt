@@ -63,3 +63,74 @@ Approach:
         "userInput": "Take a nap"
     }
 ]
+
+When user clicks on the delete task button:
+
+    Highlight all the tasks
+
+    When the user clicks on which task they want to delete:
+
+    if itemsList has only 1 child remaining:
+
+        uncheck the li checkbox
+        clear the li text
+        hide the tasks cont
+        hide the buttons cont
+        show the no tasks cont
+    
+    else
+        tasksFromLocalStorage = getTasksFromLocalStorage()
+
+
+        remove the item from the DOM
+        
+
+     
+    const lastElem = ....
+    const textInput = ....
+
+    if (textInput.value === ""):
+        alert()
+        return
+
+
+// document.querySelectorAll(".list-elem").forEach(function (listElem) {
+        //     const listElemCheckbox = listElem.querySelector(".checkbox");
+        //     const listElemInput = listElem.querySelector(".text-input");
+
+        //     listElem.style.cursor = "pointer";
+        //     listElemCheckbox.style.cursor = "pointer";
+        //     listElemInput.style.cursor = "pointer";
+
+        //     listElemCheckbox.disabled = true;
+
+        //     listElemInput.addEventListener("focus", function () { this.blur() });
+
+        //     listElem.classList.add("red-border");
+
+        // });
+
+
+if (elementsHighlighted.bool === true) {
+
+    addBtn.disabled = false;
+    addBtn.style.pointerEvents = "auto";
+
+    document.querySelectorAll(".list-elem").forEach(function (listElem) {
+        const listElemCheckbox = listElem.querySelector(".checkbox");
+        const listElemInput = listElem.querySelector(".text-input");
+
+        listElem.style.cursor = "auto";
+        listElemCheckbox.style.cursor = "auto";
+        listElemInput.style.cursor = "auto";
+
+        listElemCheckbox.disabled = false;
+        listElemInput.disabled = false;
+
+        listElemInput.addEventListener("focus", function () { this.focus() });
+
+        listElem.classList.remove("red-border");
+    });
+}
+
+this.classList.add("display-none");

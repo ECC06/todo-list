@@ -7,10 +7,18 @@
     <title>Document</title>
     <link rel="shortcut icon" href="./images-and-icons/icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
-    <script defer src="./index.js"></script>
+    <script defer type="module" src="./index.js"></script>
+    <script defer type="module" src="./event-handlers.js"></script>
+    <script defer type="module" src="./task-class.js"></script>
 </head>
 
 <body>
+    <dialog>
+        <p>Do you want to delete a single task or delete ALL tasks?</p>
+        <button class="delete-task-btn">Delete task</button>
+        <button class="delete-all-btn">Delete all </button>
+    </dialog>
+
     <div class="chalkboard-cont">
         <img class="chalkboard" src="./images-and-icons/images/chalkboard.png" alt="chalkboard">
 
@@ -32,7 +40,7 @@
 
         <!-- tasks container -->
         <article class="tasks-cont display-none">
-            <h1>TASKS DONE: <span>2</span>/<span>10</span></h1>
+            <!-- <h1>TASKS DONE: <span>2</span>/<span>10</span></h1> -->
 
             <ul class="items-list">
                 <li class="list-elem">
@@ -48,8 +56,17 @@
         </article>
 
         <div class="buttons display-none">
-            <img class="add-btn" src="./images-and-icons/icons/add-task-icon.svg" alt="add task icon">
-            <img class="add-btn" src="./images-and-icons/icons/delete-task-icon.svg" alt="delete task icon">
+            <button class="cancel-delete-btn display-none">
+                <img src="./images-and-icons/icons/delete-task-icon.svg" alt="delete task icon">
+            </button>
+            <button class="add-btn">
+                <img src="./images-and-icons/icons/add-task-icon.svg" alt="add task icon">
+            </button>
+
+            <button class="delete-btn">
+                <img src="./images-and-icons/icons/delete-task-icon.svg" alt="delete task icon">
+            </button>
+
         </div>
     </div>
 
