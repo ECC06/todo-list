@@ -14,7 +14,7 @@ export class Task {
         const lastElem = itemsList.lastElementChild;
         const lastElemTextInput = lastElem.querySelector(".text-input");
 
-        if (itemsList.children.length < 10) {
+        if (itemsList.children.length < 11) {
             if (!lastElemTextInput.value) {
                 alert("Fill in the current task first!");
             } else {

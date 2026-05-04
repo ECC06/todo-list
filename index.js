@@ -1,15 +1,19 @@
-import { dialog, itemsList, updateIds, generateTaskId, getLastItem, getLastCheckbox, getLastTextInput, getArrFromLocalStorage, addBtn, deleteBtn, elementsHighlighted, showMainPage } from "./shared.js";
+import { dialog, itemsList, updateIds, generateTaskId, getLastItem, getLastCheckbox, getLastTextInput, getArrFromLocalStorage, addBtn, deleteBtn, deleteSingleItemClicked, showMainPage } from "./shared.js";
 
-import { updateCheckedState, handleSelectedElement, toggleHighlightedListBorders } from "./event-handlers.js";
+import { updateCheckedState, handleSelectedElement, toggleHighlightedListBorders, deleteAllTasks, updateTask } from "./event-handlers.js";
 
 import { Task } from "./task-class.js";
 
-const deleteSingleTaskBtn = document.querySelector(".delete-task-btn");
-const cancelDeleteBtn = document.querySelector(".cancel-delete-btn");
+const closeModal = document.querySelector(".close-modal");
+const deleteSingleTaskBtn = document.querySelector(".delete-single-task");
+const deleteAllBtn = document.querySelector(".delete-all-btn");
 
 const firstAddBtn = document.querySelector(".first-add-btn");
 
-const firstInputElem = document.querySelector(".items-list .text-input")
+const firstInputElem = document.querySelector(".items-list .text-input");
+
+const body = document.querySelector("body");
+const chalkboardCont = document.querySelector(".chalkboard-cont");
 
 
 firstAddBtn.addEventListener("click", function (e) {
@@ -51,29 +55,75 @@ document.addEventListener("DOMContentLoaded", function () {
 itemsList.addEventListener("focusout", function (e) {
     if (e.target.type === "text") {
         const textInputElem = e.target;
-
-        if (textInputElem.value !== "") {
-            const textInputElemId = textInputElem.id; //e.g "task-33-text-input"
-            const taskId = textInputElemId.split("-")[1]; //"33"
-
-            //creates a new task object 
-            const taskObj = new Task(taskId, false, textInputElem.value);
-
-            // creates or saves a new task in local storage
-            taskObj.updateTaskInLocalStorage();
-        } else {
-            const listElem = textInputElem.parentElement.parentElement;
-            listElem.remove();
-        }
+        updateTask(e);
     }
 });
 
 //!Updates the "checkedState" property in local storage when user clicks on the textbox of an element
-
 itemsList.addEventListener("change", updateCheckedState);
 
 
+//!Shows a modal which presents the user with the option to delete one task, or delete all tasks
+deleteBtn.addEventListener("click", function (e) {
+    body.style.backdropFilter = "blur(10px)";
+    chalkboardCont.style.filter = "blur(10px)";
 
+    dialog.showModal();
+
+    deleteBtn.disabled = true;
+    deleteBtn.pointerEvents = "none";
+
+    addBtn.disabled = true;
+    addBtn.style.pointerEvents = "none";
+});
+
+//fired when the user clicks on the delete single task button
+deleteSingleTaskBtn.addEventListener("click", function (e) {
+    body.style.backdropFilter = "none";
+    chalkboardCont.style.filter = "none";
+
+    deleteSingleItemClicked.bool = true;
+
+    toggleHighlightedListBorders(deleteSingleItemClicked.bool);
+
+    itemsList.addEventListener("click", handleSelectedElement, { once: true });
+
+    dialog.close();
+});
+
+//gives the user the option to just go back and abort deleting an item
+closeModal.addEventListener("click", function () {
+    body.style.backdropFilter = "none";
+    chalkboardCont.style.filter = "none";
+
+    deleteBtn.disabled = false;
+    deleteBtn.pointerEvents = "auto";
+
+    addBtn.disabled = false;
+    addBtn.style.pointerEvents = "auto";
+
+    dialog.close();
+});
+
+
+deleteAllBtn.addEventListener("click", function (e) {
+    const confirmDeleteAll = confirm("Are you sure you want to delete ALL tasks?");
+
+    if (confirmDeleteAll === true) {
+        deleteAllTasks();
+    }
+
+    deleteBtn.disabled = false;
+    deleteBtn.pointerEvents = "auto";
+
+    addBtn.disabled = false;
+    addBtn.style.pointerEvents = "auto";
+
+    body.style.backdropFilter = "none";
+    chalkboardCont.style.filter = "none";
+
+    dialog.close();
+});
 
 
 

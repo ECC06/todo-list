@@ -14,9 +14,23 @@
 
 <body>
     <dialog>
-        <p>Do you want to delete a single task or delete ALL tasks?</p>
-        <button class="delete-task-btn">Delete task</button>
-        <button class="delete-all-btn">Delete all </button>
+        <img class="modal-desktop-img" src="./images-and-icons/images/chalkboard-modal-desktop.svg" alt="chalkboard">
+
+        <button class="close-modal">
+            <img src="./images-and-icons/icons/close-modal-icon.svg" alt="close modal icon">
+        </button>
+
+        <article class="dialog-text-and-btns-cont">
+            <p class="delete-question">Do you want to delete a single task or delete ALL tasks?</p>
+
+            <div class="dialog-delete-btns">
+                <!-- delete single task btn -->
+                <button class="delete-task-btn delete-single-task">Delete task</button>
+
+                <!-- delete all tasks btn -->
+                <button class="delete-task-btn delete-all-btn">Delete all tasks</button>
+            </div>
+        </article>
     </dialog>
 
     <div class="chalkboard-cont">
@@ -50,15 +64,10 @@
                         <input class="text-input" type="text" id="">
                     </label>
                 </li>
-
-
             </ul>
         </article>
 
         <div class="buttons display-none">
-            <button class="cancel-delete-btn display-none">
-                <img src="./images-and-icons/icons/delete-task-icon.svg" alt="delete task icon">
-            </button>
             <button class="add-btn">
                 <img src="./images-and-icons/icons/add-task-icon.svg" alt="add task icon">
             </button>
