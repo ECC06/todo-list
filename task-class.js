@@ -1,4 +1,4 @@
-import { itemsList, getLastItem, updateIds, generateTaskId, getArrFromLocalStorage } from "./shared.js";
+import { itemsList, getLastItem, updateIds, generateTaskId, getArrFromLocalStorage, showMainPage, tasksCreatedElem, getTasksCreatedFromLocalStorage } from "./shared.js";
 
 export class Task {
 
@@ -8,15 +8,14 @@ export class Task {
         this.userInput = userInput;
     }
 
-
     //CREATE
     static addTaskToPage() {
         const lastElem = itemsList.lastElementChild;
         const lastElemTextInput = lastElem.querySelector(".text-input");
 
-        if (itemsList.children.length < 11) {
+        if (itemsList.children.length < 10) {
             if (!lastElemTextInput.value) {
-                alert("Fill in the current task first!");
+                alert("Fill in the current task first!"); return;
             } else {
                 //clones list item 
                 const clonedListItem = getLastItem().cloneNode(true);
@@ -28,13 +27,22 @@ export class Task {
 
                 clonedTextInput.value = "";
 
-                //adds a new list element to the items list list
+                //adds a new list element to the items list
                 itemsList.appendChild(clonedListItem);
 
                 // update the ids of the last li element on the page (including it's checkbox and text input)
                 updateIds(generateTaskId());
 
                 clonedTextInput.focus();
+
+                //update the number of tasks created counter
+                let tasksCreated = getTasksCreatedFromLocalStorage();
+
+                tasksCreated++;
+
+                tasksCreatedElem.textContent = tasksCreated;
+                localStorage.setItem("tasks-created", JSON.stringify(tasksCreated));
+
                 return;
             }
 
@@ -78,6 +86,45 @@ export class Task {
         localStorage.setItem("tasks", JSON.stringify(tasksInLocalStorage));
     }
 
+    //DELETE
+
+    //removes the element from the page and from local storage
+    static deleteElement(selectedElem) {
+        //removes element from page
+        if (itemsList.children.length !== 1) {
+            selectedElem.remove();
+        } else {
+            selectedElem.querySelector(".checkbox").checked = false;
+            selectedElem.querySelector(".text-input").value = "";
+
+            showMainPage();
+        }
+
+        removeItemFromLocalStorage();
+
+        let tasksCreated = JSON.parse(localStorage.getItem("tasks-created"));
+
+        //remove tasks created 
+        tasksCreated--;
+        tasksCreatedElem.textContent = tasksCreated;
+        localStorage.setItem("tasks-created", JSON.stringify(tasksCreated));
+
+
+        function removeItemFromLocalStorage() {
+            //removes element from local storage
+            const tasksArr = getArrFromLocalStorage();
+            const selectedElemId = selectedElem.id.split("-")[1];
+
+            //finds the task the user selected and removes it from local storage
+            const newArr = tasksArr.filter(obj => obj.id !== selectedElemId);
+
+            if (newArr.length === 0) {
+                localStorage.removeItem("tasks");
+            } else {
+                localStorage.setItem("tasks", JSON.stringify(newArr));
+            }
+        }
+    }
 
 
 }

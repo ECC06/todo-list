@@ -20,12 +20,17 @@
             <img src="./images-and-icons/icons/close-modal-icon.svg" alt="close modal icon">
         </button>
 
-        <article class="dialog-text-and-btns-cont">
-            <p class="delete-question">Do you want to delete a single task or delete ALL tasks?</p>
+        <article class="tasks-completed-cont display-none">
+            <img src="./images-and-icons/images/tasks-completed-img.svg" alt="cat jumping for joy">
+            <h2>YOU'VE COMPLETED ALL YOUR TASKS! 🎉🎉🎉</h2>
+        </article>
+
+        <article class="delete-options-cont">
+            <p class="delete-question">Do you want to delete a single task, or delete ALL tasks?</p>
 
             <div class="dialog-delete-btns">
                 <!-- delete single task btn -->
-                <button class="delete-task-btn delete-single-task">Delete task</button>
+                <button class="delete-task-btn delete-single-task">Delete single task</button>
 
                 <!-- delete all tasks btn -->
                 <button class="delete-task-btn delete-all-btn">Delete all tasks</button>
@@ -41,7 +46,7 @@
             <img class="sleeping-cat" src="./images-and-icons/images/no-tasks-img.png"
                 alt="chalk drawing of a sleeping man">
 
-            <h1>YOU HAVE NO TASKS</h1>
+            <h1>YOU HAVE NO TASKS!</h1>
 
             <button class="first-add-btn">
                 <span>Add one!</span>
@@ -54,7 +59,7 @@
 
         <!-- tasks container -->
         <article class="tasks-cont display-none">
-            <!-- <h1>TASKS DONE: <span>2</span>/<span>10</span></h1> -->
+            <h1>TASKS DONE: <span class="tasks-checked">0</span>/<span class="tasks-created">1</span></h1>
 
             <ul class="items-list">
                 <li class="list-elem">
@@ -79,6 +84,8 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
+    <link rel="stylesheet" href="dist/dragula.css">
 </body>
 
 </html>

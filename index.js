@@ -1,6 +1,6 @@
-import { dialog, itemsList, updateIds, generateTaskId, getLastItem, getLastCheckbox, getLastTextInput, getArrFromLocalStorage, addBtn, deleteBtn, deleteSingleItemClicked, showMainPage } from "./shared.js";
+import { dialog, itemsList, updateIds, generateTaskId, getLastItem, getLastCheckbox, getLastTextInput, getArrFromLocalStorage, addBtn, deleteBtn, deleteSingleItemClicked, showMainPage, tasksCheckedElem, tasksCreatedElem, getTasksCreatedFromLocalStorage, getTasksCheckedFromLocalStorage, tasksCompletedCont, deleteOptionsCont } from "./shared.js";
 
-import { updateCheckedState, handleSelectedElement, toggleHighlightedListBorders, deleteAllTasks, updateTask } from "./event-handlers.js";
+import { updateCheckedState, confirmDelete, toggleHighlightedListBorders, deleteAllTasks, updateTask } from "./event-handlers.js";
 
 import { Task } from "./task-class.js";
 
@@ -15,8 +15,9 @@ const firstInputElem = document.querySelector(".items-list .text-input");
 const body = document.querySelector("body");
 const chalkboardCont = document.querySelector(".chalkboard-cont");
 
-
 firstAddBtn.addEventListener("click", function (e) {
+    localStorage.setItem("tasks-created", JSON.stringify(1));
+    localStorage.setItem("tasks-checked", JSON.stringify(0));
 
     showMainPage();
 
@@ -31,6 +32,9 @@ addBtn.addEventListener("click", Task.addTaskToPage);
 //!Reads tasks from local storage when the page loads (or is re-loaded)
 document.addEventListener("DOMContentLoaded", function () {
     const tasksInLocalStorage = getArrFromLocalStorage();
+
+    tasksCreatedElem.textContent = getTasksCreatedFromLocalStorage() ?? 1;
+    tasksCheckedElem.textContent = getTasksCheckedFromLocalStorage() ?? 0;
 
     if (!tasksInLocalStorage) {
         console.log("No tasks in local storage");
@@ -47,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 itemsList.appendChild(clonedItem);
             }
         });
+
         showMainPage();
     }
 });
@@ -86,7 +91,7 @@ deleteSingleTaskBtn.addEventListener("click", function (e) {
 
     toggleHighlightedListBorders(deleteSingleItemClicked.bool);
 
-    itemsList.addEventListener("click", handleSelectedElement, { once: true });
+    itemsList.addEventListener("click", confirmDelete, { once: true });
 
     dialog.close();
 });
@@ -101,6 +106,10 @@ closeModal.addEventListener("click", function () {
 
     addBtn.disabled = false;
     addBtn.style.pointerEvents = "auto";
+
+    //in-case the opposite is true
+    deleteOptionsCont.classList.remove("display-none");
+    tasksCompletedCont.classList.add("display-none");
 
     dialog.close();
 });
@@ -125,9 +134,23 @@ deleteAllBtn.addEventListener("click", function (e) {
     dialog.close();
 });
 
+// itemsList.addEventListener("mousedown", function (e) {
+//     if (e.target.className === "text-input") {
+//         setTimeout(() => {
+//             e.target.style.cursor = "grabbing";
+//             e.target.classList.add("transparent-selection");
+//             dragula([itemsList]);
+//         }, 500);
+//     }
+// });
 
-
-
+// itemsList.addEventListener("mouseup", function (e) {
+//     if (e.target.className === "text-input") {
+//         e.target.classList.remove("transparent-selection");
+//         e.target.style.cursor = "text";
+//         console.log("mouseup");
+//     }
+// })
 
 
 

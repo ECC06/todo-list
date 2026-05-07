@@ -15,6 +15,15 @@ body {
     src: url(./DkCrayonCrumble-ddll.ttf);
 }
 
+@font-face {
+    font-family: Chalkduster;
+    src: url(./Chalkduster.ttf);
+}
+
+.dialog-delete-btns button {
+    /* outline: 2px solid white; */
+}
+
 body,
 input,
 button {
@@ -58,6 +67,33 @@ dialog {
     width: 100%;
 }
 
+.tasks-completed-cont,
+.delete-options-cont {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}
+
+.tasks-completed-cont {
+    top: 46%;
+}
+
+.tasks-completed-cont img {
+    min-width: 70px;
+    width: 50%;
+    max-width: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+.tasks-completed-cont h2 {
+    margin-top: 8px;
+    text-align: center;
+    color: white;
+    font-size: clamp(0.875rem, 2.769vw + 0.321rem, 2rem);
+}
+
 .modal-mobile-img {
     display: none;
 }
@@ -68,15 +104,11 @@ dialog {
     object-fit: contain;
 }
 
-.dialog-text-and-btns-cont {
+.delete-options-cont {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
     width: 80%;
 }
 
@@ -97,24 +129,25 @@ dialog {
 .delete-task-btn {
     border: none;
     background-color: transparent;
-    font-size: 28px;
+    font-size: 24px;
     color: white;
     cursor: pointer;
-    padding: 12px 8px 8px;
+    padding-top: 4px;
     transition: scale 0.3s;
     cursor: pointer;
     height: 50px;
     background-repeat: no-repeat;
+    white-space: nowrap;
 }
 
 .delete-single-task {
     background-image: url("./images-and-icons/images/delete-single-btn-cont.svg");
-    width: 140px;
+    width: 180px;
 }
 
 .delete-all-btn {
     background-image: url("./images-and-icons/images/delete-all-btn-cont.svg");
-    width: 180px;
+    width: 160px;
 }
 
 .delete-task-btn:hover {
@@ -132,7 +165,12 @@ dialog {
 }
 
 h1 {
-    font-weight: normal;
+    font-family: "Chalkduster", sans-serif;
+}
+
+h1,
+h2 {
+    font-weight: 100;
     text-align: center;
 }
 
@@ -153,7 +191,7 @@ h1 {
 }
 
 .no-tasks-cont h1 {
-    font-size: clamp(1.5rem, 6.154vw + 0.269rem, 2.5rem);
+    font-size: clamp(1.5rem, 7.692vw + -0.038rem, 2.75rem);
 }
 
 .first-add-btn {
@@ -193,7 +231,7 @@ h1 {
 }
 
 .tasks-cont h1 {
-    font-size: 48px;
+    font-size: clamp(1.25rem, 7.143vw + -0.179rem, 2.5rem);
 }
 
 .items-list {
@@ -250,6 +288,10 @@ li:has(.checkbox:checked) label::after {
     color: white;
 }
 
+.transparent-selection::selection {
+    background-color: transparent;
+}
+
 .text-input:focus {
     outline: none;
 }
@@ -281,7 +323,7 @@ li:has(.checkbox:checked) label::after {
 }
 
 .red-border {
-    border: 3px dashed red;
+    outline: 3px dashed red;
 }
 
 @media (max-width: 580px) {
@@ -295,25 +337,28 @@ li:has(.checkbox:checked) label::after {
         right: 7%;
     }
 
+    .delete-options-cont {
+        width: 90%;
+    }
+
     .dialog-delete-btns {
         width: 280px;
+        gap: 8px;
     }
 
     .delete-task-btn {
         background-image: none;
         height: 42px;
         font-size: 20px;
-        padding: unset;
-        padding-top: 4px;
+        padding-top: 0;
     }
 
     .delete-single-task {
-        width: 120px;
         background-image: url("./images-and-icons/images/delete-single-btn-cont-mobile.svg");
+        width: 70%;
     }
 
     .delete-all-btn {
-        width: 177px;
         background-image: url("./images-and-icons/images/delete-all-btn-cont-mobile.svg");
     }
 
@@ -332,11 +377,7 @@ li:has(.checkbox:checked) label::after {
     .tasks-cont {
         width: 76%;
         top: 8%;
-        gap: 8px;
-    }
-
-    .tasks-cont h1 {
-        font-size: clamp(1.25rem, 7.692vw + -0.288rem, 2.5rem);
+        gap: 12px;
     }
 
     .items-list {
@@ -360,6 +401,7 @@ li:has(.checkbox:checked) label::after {
 
     .buttons :is(.add-btn, .delete-btn) {
         width: clamp(2rem, 10.769vw + -0.154rem, 3.75rem);
+        height: unset;
     }
 
     .buttons img {
@@ -370,19 +412,26 @@ li:has(.checkbox:checked) label::after {
 @media (max-width: 490px) {
     .dialog-delete-btns {
         width: 200px;
+        gap: 12px;
+    }
+
+    .delete-options-cont {
+        width: 80%;
     }
 
     .delete-task-btn {
-        font-size: 14px;
         height: 35px;
+        font-size: 13px;
     }
 
     .delete-single-task {
         background-image: url("./images-and-icons/images/delete-single-task-cont-mobile-xs.svg");
+        width: 52%;
     }
 
     .delete-all-btn {
         background-image: url("./images-and-icons/images/delete-all-tasks-cont-mobile-xs.svg");
+        width: 48%;
     }
 
     .tasks-cont,
@@ -406,5 +455,9 @@ li:has(.checkbox:checked) label::after {
     .tasks-cont,
     .items-list {
         gap: 5px;
+    }
+
+    .close-modal {
+        width: 12px;
     }
 }
