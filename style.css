@@ -20,10 +20,6 @@ body {
     src: url(./Chalkduster.ttf);
 }
 
-.dialog-delete-btns button {
-    /* outline: 2px solid white; */
-}
-
 body,
 input,
 button {
@@ -243,7 +239,7 @@ li {
     list-style-type: none;
 }
 
-label {
+.checkbox-and-text-cont {
     display: flex;
     align-items: stretch;
     gap: 16px;
@@ -254,17 +250,21 @@ label {
     position: relative;
 }
 
+label,
 .checkbox {
-    position: absolute;
     width: 44px;
     height: 37px;
+}
+
+.checkbox {
+    position: absolute;
     opacity: 0;
     cursor: pointer;
 }
 
 .custom-checkbox {
     width: 44px;
-    height: 37px;
+    height: 34px;
 }
 
 li:has(.checkbox:checked) label::after {
@@ -273,7 +273,7 @@ li:has(.checkbox:checked) label::after {
     height: 22px;
     position: absolute;
     inset: 0;
-    top: 23%;
+    top: 16%;
     left: 2.5%;
     display: block;
     cursor: pointer;
@@ -288,8 +288,13 @@ li:has(.checkbox:checked) label::after {
     color: white;
 }
 
-.transparent-selection::selection {
-    background-color: transparent;
+.text-input {
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.transparent-selection:active {
+    cursor: grabbing;
 }
 
 .text-input:focus {

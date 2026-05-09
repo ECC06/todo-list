@@ -45,7 +45,6 @@ export function updateCheckedState(event) {
         updateHTML();
 
         if (getTasksCheckedFromLocalStorage() === getTasksCreatedFromLocalStorage()) {
-
             dialog.showModal();
             deleteOptionsCont.classList.add("display-none");
             tasksCompletedCont.classList.remove("display-none");

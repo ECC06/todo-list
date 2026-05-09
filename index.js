@@ -26,6 +26,10 @@ firstAddBtn.addEventListener("click", function (e) {
     firstInputElem.focus();
 });
 
+function sayHello() {
+    console.log("Hello");
+}
+
 //!Creates a task on the page
 addBtn.addEventListener("click", Task.addTaskToPage);
 
@@ -133,26 +137,6 @@ deleteAllBtn.addEventListener("click", function (e) {
 
     dialog.close();
 });
-
-// itemsList.addEventListener("mousedown", function (e) {
-//     if (e.target.className === "text-input") {
-//         setTimeout(() => {
-//             e.target.style.cursor = "grabbing";
-//             e.target.classList.add("transparent-selection");
-//             dragula([itemsList]);
-//         }, 500);
-//     }
-// });
-
-// itemsList.addEventListener("mouseup", function (e) {
-//     if (e.target.className === "text-input") {
-//         e.target.classList.remove("transparent-selection");
-//         e.target.style.cursor = "text";
-//         console.log("mouseup");
-//     }
-// })
-
-
 
 
 

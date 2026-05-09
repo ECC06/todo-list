@@ -1,4 +1,4 @@
-import { itemsList, getLastItem, updateIds, generateTaskId, getArrFromLocalStorage, showMainPage, tasksCreatedElem, getTasksCreatedFromLocalStorage } from "./shared.js";
+import { itemsList, getLastItem, updateIds, generateTaskId, getArrFromLocalStorage, showMainPage, tasksCheckedElem, tasksCreatedElem, getTasksCreatedFromLocalStorage } from "./shared.js";
 
 export class Task {
 
@@ -101,14 +101,24 @@ export class Task {
         }
 
         removeItemFromLocalStorage();
+        updateTrackingNumbers();
 
-        let tasksCreated = JSON.parse(localStorage.getItem("tasks-created"));
+        function updateTrackingNumbers() {
+            let tasksChecked = JSON.parse(localStorage.getItem("tasks-checked"));
+            let tasksCreated = JSON.parse(localStorage.getItem("tasks-created"));
 
-        //remove tasks created 
-        tasksCreated--;
-        tasksCreatedElem.textContent = tasksCreated;
-        localStorage.setItem("tasks-created", JSON.stringify(tasksCreated));
+            //reduces the number that tracks the number of tasks checked
+            if (selectedElem.querySelector(".checkbox").checked === true) {
+                tasksChecked--;
+                tasksCheckedElem.textContent = tasksChecked;
+                localStorage.setItem("tasks-checked", JSON.stringify(tasksChecked));
+            }
 
+            //reduces the number that tracks the number of tasks created
+            tasksCreated--;
+            tasksCreatedElem.textContent = tasksCreated;
+            localStorage.setItem("tasks-created", JSON.stringify(tasksCreated));
+        }
 
         function removeItemFromLocalStorage() {
             //removes element from local storage

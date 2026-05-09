@@ -10,6 +10,8 @@
     <script defer type="module" src="./index.js"></script>
     <script defer type="module" src="./event-handlers.js"></script>
     <script defer type="module" src="./task-class.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
 </head>
 
 <body>
@@ -43,8 +45,8 @@
 
         <!-- "no tasks yet" container -->
         <article class="no-tasks-cont">
-            <img class="sleeping-cat" src="./images-and-icons/images/no-tasks-img.png"
-                alt="chalk drawing of a sleeping man">
+            <img class="sleeping-cat" src="./images-and-icons/images/no-tasks-img.svg"
+                alt="chalk drawing of a sleeping cat">
 
             <h1>YOU HAVE NO TASKS!</h1>
 
@@ -62,12 +64,20 @@
             <h1>TASKS DONE: <span class="tasks-checked">0</span>/<span class="tasks-created">1</span></h1>
 
             <ul class="items-list">
-                <li class="list-elem">
-                    <label>
-                        <input class="checkbox" type="checkbox" id="">
-                        <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg" alt="">
-                        <input class="text-input" type="text" id="">
-                    </label>
+                <!-- the label's for attribute and id's id dynamically updated in Javascript -->
+                <li class="list-elem" id="task-10">
+                    <div class="checkbox-and-text-cont">
+
+                        <input class="checkbox" type="checkbox" id="id-10">
+
+                        <label for="id-10">
+                            <img class="custom-checkbox" src="./images-and-icons/icons/unchecked-box.svg"
+                                alt="checkbox drawn in chalk">
+                        </label>
+
+                        <input class="text-input" type="text" id="task-10-text-input">
+                    </div>
+
                 </li>
             </ul>
         </article>
@@ -83,9 +93,6 @@
 
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
-    <link rel="stylesheet" href="dist/dragula.css">
 </body>
 
 </html>

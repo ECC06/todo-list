@@ -26,8 +26,9 @@ export const getTasksCreatedFromLocalStorage = () => JSON.parse(localStorage.get
 
 export const getLastItem = () => itemsList.lastElementChild;
 
-export const getLastTextInput = () => getLastItem().querySelector(".text-input");
 export const getLastCheckbox = () => getLastItem().querySelector(".checkbox");
+export const getLastLabel = () => getLastItem().querySelector("label");
+export const getLastTextInput = () => getLastItem().querySelector(".text-input");
 
 export const generateTaskId = () => {
     //generates random num between 10 & 99
@@ -64,11 +65,14 @@ export const generateTaskId = () => {
 };
 
 
-//creates ids for the last li element, checkbox and text input on the page
+//creates ids for the last li element, label, checkbox and text input on the page
 export function updateIds(id) {
-    getLastItem().setAttribute("id", `task-${id}`);
-    getLastTextInput().id = `task-${id}-text-input`
-    getLastCheckbox().id = `task-${id}-checkbox`;
+    getLastItem().id = `task-${id}`;
+
+    getLastLabel().setAttribute("for", `id-${id}`);
+    getLastCheckbox().id = `id-${id}`;
+
+    getLastTextInput().id = `task-${id}-text-input`;
 }
 
 export function showMainPage() {
