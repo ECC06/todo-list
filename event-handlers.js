@@ -104,27 +104,26 @@ export function toggleHighlightedListBorders(btnClicked) {
 
 //adds an event listener to each item on the list that can allow it to be removed
 export function confirmDelete(event) {
-    const confirmation = window.confirm("Are you sure you want to delete this item?");
+    let clickedLiElem;
+
+    //ensures the list element is stored in a variable no matter what element is clicked
+    if (event.target.className === "list-elem") {
+        clickedLiElem = event.target;
+    }
+
+    if (event.target.tagName === "LABEL") {
+        clickedLiElem = event.target.parentElement;
+    }
+
+    if (event.target.className === "text-input") {
+        clickedLiElem = event.target.parentElement.parentElement;
+        clickedLiElem.blur();
+    }
+
+    const textInput = clickedLiElem.querySelector(".text-input").value;
+    const confirmation = window.confirm(`Are you sure you want to delete: ${textInput}?`);
 
     if (confirmation === true) {
-
-        let clickedLiElem;
-
-        //ensures the list element is stored in a variable no matter what element is clicked
-
-        if (event.target.className === "list-elem") {
-            clickedLiElem = event.target;
-        }
-
-        if (event.target.tagName === "LABEL") {
-            clickedLiElem = event.target.parentElement;
-        }
-
-        if (event.target.className === "text-input") {
-            clickedLiElem = event.target.parentElement.parentElement;
-            clickedLiElem.blur();
-        }
-
         Task.deleteElement(clickedLiElem);
     }
 

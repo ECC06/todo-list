@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+:root {
+    --highlight-bg: blue;
+}
+
 html,
 body {
     min-height: 100dvh;
@@ -288,9 +292,15 @@ li:has(.checkbox:checked) label::after {
     color: white;
 }
 
-.text-input {
-    -webkit-user-select: none;
-    user-select: none;
+.text-input::selection {
+    background-color: var(--highlight-bg);
+}
+
+.text-input:-webkit-autofill,
+.text-input:-webkit-autofill:hover,
+.text-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .transparent-selection:active {

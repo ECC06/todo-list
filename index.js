@@ -13,6 +13,7 @@ const firstAddBtn = document.querySelector(".first-add-btn");
 const firstInputElem = document.querySelector(".items-list .text-input");
 
 const body = document.querySelector("body");
+const chalkboardImg = document.querySelector(".chalkboard");
 const chalkboardCont = document.querySelector(".chalkboard-cont");
 
 firstAddBtn.addEventListener("click", function (e) {
@@ -26,12 +27,19 @@ firstAddBtn.addEventListener("click", function (e) {
     firstInputElem.focus();
 });
 
-function sayHello() {
-    console.log("Hello");
-}
+//prevents the image element from being dragged
+chalkboardImg.addEventListener("dragstart", function (e) {
+    e.preventDefault();
+})
 
-//!Creates a task on the page
+//!Creates a task on the page when the user clicks on the add button or clicks on the "Enter" key
 addBtn.addEventListener("click", Task.addTaskToPage);
+
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+        Task.addTaskToPage();
+    }
+});
 
 //!Reads tasks from local storage when the page loads (or is re-loaded)
 document.addEventListener("DOMContentLoaded", function () {
@@ -136,6 +144,25 @@ deleteAllBtn.addEventListener("click", function (e) {
     chalkboardCont.style.filter = "none";
 
     dialog.close();
+});
+
+// !!RE-ORDER LIST ITEMS
+new Sortable(itemsList, {
+    animation: 300,
+    delay: 300,
+
+    onStart: function (evt) {
+        const textInput = evt.item.querySelector(".text-input");
+        document.querySelector(":root").style.setProperty("--highlight-bg", "transparent");
+        textInput.disabled = true;
+        evt.item.style.opacity = "0.5";
+    },
+    onEnd: function (evt) {
+        const textInput = evt.item.querySelector(".text-input");
+        document.querySelector(":root").style.setProperty("--highlight-bg", "blue");
+        textInput.disabled = false;
+        evt.item.style.opacity = "1";
+    },
 });
 
 
