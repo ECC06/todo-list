@@ -35,11 +35,14 @@ chalkboardImg.addEventListener("dragstart", function (e) {
 //!Creates a task on the page when the user clicks on the add button or clicks on the "Enter" key
 addBtn.addEventListener("click", Task.addTaskToPage);
 
-document.addEventListener("keydown", function (e) {
+itemsList.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
-        Task.addTaskToPage();
+        if (e.target.className === "text-input") {
+            Task.addTaskToPage(e);
+        }
     }
 });
+
 
 //!Reads tasks from local storage when the page loads (or is re-loaded)
 document.addEventListener("DOMContentLoaded", function () {

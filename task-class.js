@@ -9,7 +9,7 @@ export class Task {
     }
 
     //CREATE
-    static addTaskToPage() {
+    static addTaskToPage(event) {
         const lastElem = itemsList.lastElementChild;
         const lastElemTextInput = lastElem.querySelector(".text-input");
 
@@ -17,33 +17,51 @@ export class Task {
             if (!lastElemTextInput.value) {
                 alert("Fill in the current task first!"); return;
             } else {
-                //clones list item 
-                const clonedListItem = getLastItem().cloneNode(true);
 
-                const clonedCheckbox = clonedListItem.querySelector(".checkbox");
-                const clonedTextInput = clonedListItem.querySelector(".text-input");
+                if (event.type === "click") {
+                    const clonedListItem = getLastItem().cloneNode(true);
+                    const emptyTask = cleanUpClone(clonedListItem);
 
-                clonedCheckbox.checked = false;
+                    itemsList.appendChild(emptyTask);
 
-                clonedTextInput.value = "";
+                    clonedListItem.querySelector(".text-input").focus();
 
-                //adds a new list element to the items list
-                itemsList.appendChild(clonedListItem);
+                } else if (event.type === "keydown" && event.key === "Enter") {
+                    const liOfTextInput = event.target.parentElement.parentElement;
 
-                // update the ids of the last li element on the page (including it's checkbox and text input)
-                updateIds(generateTaskId());
+                    const clonedListItem = liOfTextInput.cloneNode(true);
+                    const emptyTask = cleanUpClone(clonedListItem);
 
-                clonedTextInput.focus();
+                    liOfTextInput.after(emptyTask);
 
-                //update the number of tasks created counter
-                let tasksCreated = getTasksCreatedFromLocalStorage();
+                    emptyTask.querySelector(".text-input").focus();
+                }
 
-                tasksCreated++;
+                updateIds(generateTaskId()); // update the ids of the last li element on the page (including it's checkbox and text input
 
-                tasksCreatedElem.textContent = tasksCreated;
-                localStorage.setItem("tasks-created", JSON.stringify(tasksCreated));
-
+                updateTasksCreated();
                 return;
+
+                function cleanUpClone(item) {
+                    const clonedCheckbox = item.querySelector(".checkbox");
+                    const clonedTextInput = item.querySelector(".text-input");
+
+                    clonedCheckbox.checked = false;
+
+                    clonedTextInput.value = "";
+
+                    return item;
+                }
+
+                function updateTasksCreated() {
+                    //update the number of tasks created counter
+                    let tasksCreated = getTasksCreatedFromLocalStorage();
+
+                    tasksCreated++;
+
+                    tasksCreatedElem.textContent = tasksCreated;
+                    localStorage.setItem("tasks-created", JSON.stringify(tasksCreated));
+                }
             }
 
         }
@@ -115,7 +133,7 @@ export class Task {
             }
 
             //reduces the number that tracks the number of tasks created
-            tasksCreated--;
+            if (tasksCreated > 1) tasksCreated--;
             tasksCreatedElem.textContent = tasksCreated;
             localStorage.setItem("tasks-created", JSON.stringify(tasksCreated));
         }
