@@ -18,11 +18,29 @@ export function updateTask(event) {
         return;
     }
 
+    //if the text input is empty when user focuses out
+
     const listElem = textInputElem.parentElement.parentElement;
+    const listElemId = listElem.id.slice(5); //"task-64" => 64
+
 
     if (listElem !== itemsList.firstElementChild) {
+
+        //remove item from local storage if it is found
+        let tasksArr = JSON.parse(localStorage.getItem("tasks"));
+
+        const taskFound = tasksArr.some((obj) => obj.id === listElemId);
+
+        if (taskFound) {
+            tasksArr = tasksArr.filter((obj) => obj.id !== listElemId);
+        }
+
+        localStorage.setItem("tasks", JSON.stringify(tasksArr));
+
+        //remove item from html
         listElem.remove();
 
+        //reduce the tasks count
         let tasksCreated = JSON.parse(localStorage.getItem("tasks-created"));
 
         tasksCreated--;
