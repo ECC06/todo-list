@@ -79,13 +79,20 @@ export class Task {
 
         //adds a new tasksArray to local storage entirely if local storage is empty
         if (!tasksInLocalStorage) {
-            //if the id of the task the user typed into isn't found in local storage, then just create a new task in local storage
+
             tasksArr.push(this); //this => {id, checkedState, userInput}
 
             //update local storage
             localStorage.setItem("tasks", JSON.stringify(tasksArr));
             return;
         }
+
+        //adds a new task entirely if the task the user typed into isn't in local storage
+        if (!taskUpdated) {
+            tasksInLocalStorage.push(this);
+        }
+
+        localStorage.setItem("tasks", JSON.stringify(tasksInLocalStorage));
 
         //updates task.userInput if user typed into is stored in local storage
         for (const obj of tasksInLocalStorage) {
@@ -95,13 +102,6 @@ export class Task {
                 break;
             }
         }
-
-        if (!taskUpdated) {
-            //adds a new task entirely if the task the user typed into isn't in local storage
-            tasksInLocalStorage.push(this);
-        }
-
-        localStorage.setItem("tasks", JSON.stringify(tasksInLocalStorage));
     }
 
     //DELETE

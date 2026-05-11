@@ -165,7 +165,27 @@ new Sortable(itemsList, {
         document.querySelector(":root").style.setProperty("--highlight-bg", "blue");
         textInput.disabled = false;
         evt.item.style.opacity = "1";
+
+        updateLocalStorage();
+
+        function updateLocalStorage() {
+            const newTasksArr = [];
+
+            for (let li of itemsList.children) {
+                const taskId = li.id;
+                const checkedState = li.querySelector(".checkbox").checked;
+                const userInput = li.querySelector(".text-input").value;
+
+                const taskObj = new Task(taskId, checkedState, userInput);
+
+                newTasksArr.push(taskObj);
+            }
+
+            localStorage.setItem("tasks", JSON.stringify(newTasksArr));
+        }
     },
+
+
 });
 
 
