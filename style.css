@@ -292,13 +292,12 @@ li:has(.checkbox:checked) label::after {
     color: white;
 }
 
-.text-input:-webkit-autofill,
-.text-input:-webkit-autofill:hover,
-.text-input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-    box-shadow: 0 0 0px 1000px transparent inset;
-    -webkit-text-fill-color: white;
-    transition: background-color 5000s ease-in-out 0s;
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px transparent inset !important;
+    -webkit-text-fill-color: transparent !important;
 }
 
 .transparent-selection:active {
