@@ -41,7 +41,7 @@ export function updateTask(event) {
         listElem.remove();
 
         //reduce the tasks count
-        let tasksCreated = JSON.parse(localStorage.getItem("tasks-created"));
+        let tasksCreated = JSON.parse(getTasksCreatedFromLocalStorage());
 
         tasksCreated--;
 

@@ -1,4 +1,4 @@
-import { itemsList, getLastItem, updateIds, generateTaskId, getArrFromLocalStorage, showMainPage, tasksCheckedElem, tasksCreatedElem, getTasksCreatedFromLocalStorage } from "./shared.js";
+import { itemsList, getLastItem, updateIds, generateTaskId, getArrFromLocalStorage, showMainPage, tasksCheckedElem, tasksCreatedElem, getTasksCreatedFromLocalStorage, getTasksCheckedFromLocalStorage } from "./shared.js";
 
 export class Task {
 
@@ -17,30 +17,33 @@ export class Task {
             if (!lastElemTextInput.value) {
                 alert("Fill in the current task first!"); return;
             } else {
-
-                if (event.type === "click") {
-                    const clonedListItem = getLastItem().cloneNode(true);
-                    const emptyTask = cleanUpClone(clonedListItem);
-
-                    itemsList.appendChild(emptyTask);
-
-                    clonedListItem.querySelector(".text-input").focus();
-
-                } else if (event.type === "keydown" && event.key === "Enter") {
-                    const liOfTextInput = event.target.parentElement.parentElement;
-
-                    const clonedListItem = liOfTextInput.cloneNode(true);
-                    const emptyTask = cleanUpClone(clonedListItem);
-
-                    liOfTextInput.after(emptyTask);
-
-                    emptyTask.querySelector(".text-input").focus();
-                }
+                updateHTML();
 
                 updateIds(generateTaskId()); // update the ids of the last li element on the page (including it's checkbox and text input
-
                 updateTasksCreated();
+
                 return;
+
+                function updateHTML() {
+                    if (event.type === "click") {
+                        const clonedListItem = getLastItem().cloneNode(true);
+                        const emptyTask = cleanUpClone(clonedListItem);
+
+                        itemsList.appendChild(emptyTask);
+
+                        clonedListItem.querySelector(".text-input").focus();
+
+                    } else if (event.type === "keydown" && event.key === "Enter") {
+                        const liOfTextInput = event.target.parentElement.parentElement;
+
+                        const clonedListItem = liOfTextInput.cloneNode(true);
+                        const emptyTask = cleanUpClone(clonedListItem);
+
+                        liOfTextInput.after(emptyTask);
+
+                        emptyTask.querySelector(".text-input").focus();
+                    }
+                }
 
                 function cleanUpClone(item) {
                     const clonedCheckbox = item.querySelector(".checkbox");
@@ -122,8 +125,8 @@ export class Task {
         updateTrackingNumbers();
 
         function updateTrackingNumbers() {
-            let tasksChecked = JSON.parse(localStorage.getItem("tasks-checked"));
-            let tasksCreated = JSON.parse(localStorage.getItem("tasks-created"));
+            let tasksChecked = getTasksCheckedFromLocalStorage();
+            let tasksCreated = getTasksCreatedFromLocalStorage();
 
             //reduces the number that tracks the number of tasks checked
             if (selectedElem.querySelector(".checkbox").checked === true) {
